@@ -1,0 +1,28 @@
+# Node
+Frontend/node_modules/
+Frontend/dist/
+
+# Angular
+.angular/
+.cache/
+
+# .NET
+**/bin/
+**/obj/
+.vs/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# Docker
+docker-data/
+
+# OS
+.DS_Store
+Thumbs.db
