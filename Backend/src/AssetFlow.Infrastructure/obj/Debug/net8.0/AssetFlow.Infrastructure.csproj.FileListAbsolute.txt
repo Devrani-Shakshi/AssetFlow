@@ -9,3 +9,5 @@ C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Infrastructure\
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Infrastructure\obj\Debug\net8.0\refint\AssetFlow.Infrastructure.dll
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Infrastructure\obj\Debug\net8.0\AssetFlow.Infrastructure.pdb
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Infrastructure\obj\Debug\net8.0\ref\AssetFlow.Infrastructure.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Infrastructure\obj\Debug\net8.0\AssetFlow.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Infrastructure\obj\Debug\net8.0\AssetFlow.Infrastructure.sourcelink.json

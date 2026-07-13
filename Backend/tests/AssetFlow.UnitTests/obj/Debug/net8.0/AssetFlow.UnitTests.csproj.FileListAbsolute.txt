@@ -97,3 +97,4 @@ C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.UnitTests\obj
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.UnitTests\obj\Debug\net8.0\AssetFlow.UnitTests.pdb
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.UnitTests\obj\Debug\net8.0\AssetFlow.UnitTests.genruntimeconfig.cache
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.UnitTests\obj\Debug\net8.0\ref\AssetFlow.UnitTests.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.UnitTests\obj\Debug\net8.0\AssetFlow.UnitTests.sourcelink.json

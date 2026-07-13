@@ -9,3 +9,4 @@ C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Shared\obj\Debu
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Shared\obj\Debug\net8.0\refint\AssetFlow.Shared.dll
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Shared\obj\Debug\net8.0\AssetFlow.Shared.pdb
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Shared\obj\Debug\net8.0\ref\AssetFlow.Shared.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Shared\obj\Debug\net8.0\AssetFlow.Shared.sourcelink.json

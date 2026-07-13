@@ -97,3 +97,4 @@ C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTe
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.pdb
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.genruntimeconfig.cache
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\ref\AssetFlow.IntegrationTests.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.sourcelink.json
