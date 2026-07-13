@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "AssetFlow.Infrastructure/1.0.0": {
+        "runtime": {
+          "AssetFlow.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AssetFlow.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

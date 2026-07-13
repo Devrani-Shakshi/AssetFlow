@@ -1,0 +1,11 @@
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\bin\Debug\net8.0\AssetFlow.Domain.deps.json
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\bin\Debug\net8.0\AssetFlow.Domain.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\bin\Debug\net8.0\AssetFlow.Domain.pdb
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\AssetFlow.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\AssetFlow.Domain.AssemblyInfoInputs.cache
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\AssetFlow.Domain.AssemblyInfo.cs
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\AssetFlow.Domain.csproj.CoreCompileInputs.cache
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\AssetFlow.Domain.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\refint\AssetFlow.Domain.dll
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\AssetFlow.Domain.pdb
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\src\AssetFlow.Domain\obj\Debug\net8.0\ref\AssetFlow.Domain.dll
