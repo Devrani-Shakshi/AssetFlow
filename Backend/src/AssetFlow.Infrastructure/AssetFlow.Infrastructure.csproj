@@ -10,6 +10,12 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.9" />
     <PackageReference Include="MongoDB.Driver" Version="3.10.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AssetFlow.Application\AssetFlow.Application.csproj" />
+    <ProjectReference Include="..\AssetFlow.Domain\AssetFlow.Domain.csproj" />
   </ItemGroup>
 
 </Project>

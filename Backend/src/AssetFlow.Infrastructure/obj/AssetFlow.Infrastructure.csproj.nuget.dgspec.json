@@ -4,14 +4,96 @@
     "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj": {
+    "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Application\\AssetFlow.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj",
-        "projectName": "AssetFlow.Infrastructure",
-        "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Application\\AssetFlow.Application.csproj",
+        "projectName": "AssetFlow.Application",
+        "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Application\\AssetFlow.Application.csproj",
         "packagesPath": "C:\\Users\\shakshi.devrani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\shakshi.devrani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj": {
+                "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj",
+        "projectName": "AssetFlow.Domain",
+        "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj",
+        "packagesPath": "C:\\Users\\shakshi.devrani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -53,6 +135,87 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.10.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj",
+        "projectName": "AssetFlow.Infrastructure",
+        "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\AssetFlow.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\shakshi.devrani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\shakshi.devrani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Application\\AssetFlow.Application.csproj": {
+                "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Application\\AssetFlow.Application.csproj"
+              },
+              "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj": {
+                "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\src\\AssetFlow.Domain\\AssetFlow.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.2.0, )"
@@ -64,6 +227,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[3.10.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.3.0, )"
             }
           },
           "imports": [

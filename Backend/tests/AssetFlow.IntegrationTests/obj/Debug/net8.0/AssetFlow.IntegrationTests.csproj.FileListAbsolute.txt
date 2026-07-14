@@ -91,10 +91,10 @@ C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTe
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.AssemblyInfoInputs.cache
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.AssemblyInfo.cs
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.csproj.CoreCompileInputs.cache
+C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.sourcelink.json
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlo.0BB437D4.Up2Date
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.dll
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\refint\AssetFlow.IntegrationTests.dll
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.pdb
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.genruntimeconfig.cache
 C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\ref\AssetFlow.IntegrationTests.dll
-C:\Users\shakshi.devrani\Desktop\AssetFlow\Backend\tests\AssetFlow.IntegrationTests\obj\Debug\net8.0\AssetFlow.IntegrationTests.sourcelink.json
