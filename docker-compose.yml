@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: assetflow-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    image: assetflow-api
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: assetflow-api
+    ports:
+      - "5113:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=mongodb://mongo:27017/
+      - MongoDbSettings__DatabaseName=AssetFlow
+      - Jwt__Key=THIS_IS_MY_SUPER_SECRET_KEY_FOR_ASSETFLOW_2026
+      - Jwt__Issuer=AssetFlow
+      - Jwt__Audience=AssetFlowUsers
+      - Jwt__ExpiryMinutes=60
+    depends_on:
+      - mongo
+
+  frontend:
+    image: assetflow-web
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: assetflow-web
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:

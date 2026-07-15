@@ -1,15 +1,25 @@
+using AssetFlow.API.Filters;
+using AssetFlow.API.Middleware;
 using AssetFlow.Infrastructure.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Serilog
+builder.Host.UseSerilog((context, configuration) => 
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 #region Services
 
 // Controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+});
 
 // API Explorer
 builder.Services.AddEndpointsApiExplorer();
@@ -98,6 +108,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 #region Middleware
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

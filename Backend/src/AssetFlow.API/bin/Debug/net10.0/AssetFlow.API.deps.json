@@ -10,6 +10,7 @@
         "dependencies": {
           "AssetFlow.Application": "1.0.0",
           "AssetFlow.Infrastructure": "1.0.0",
+          "AssetFlow.Shared": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.9",
           "Microsoft.AspNetCore.OpenApi": "10.0.9",
           "Microsoft.OpenApi": "2.7.5",
@@ -414,6 +415,14 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "AssetFlow.Shared/1.0.0": {
+        "runtime": {
+          "AssetFlow.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -679,6 +688,11 @@
       "sha512": ""
     },
     "AssetFlow.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AssetFlow.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

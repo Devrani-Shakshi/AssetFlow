@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AssetFlow.Infrastructure\AssetFlow.Infrastructure.csproj" />
     <ProjectReference Include="..\AssetFlow.Application\AssetFlow.Application.csproj" />
+    <ProjectReference Include="..\AssetFlow.Shared\AssetFlow.Shared.csproj" />
   </ItemGroup>
 
 </Project>
