@@ -1,4 +1,5 @@
 using AssetFlow.Infrastructure.Mongo.Configuration;
+using AssetFlow.Domain.Entities;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -16,4 +17,19 @@ public class MongoDbContext
     }
 
     public IMongoDatabase Database => _database;
+
+    public IMongoCollection<User> Users => Database.GetCollection<User>("Users");
+    public IMongoCollection<Department> Departments => Database.GetCollection<Department>("Departments");
+
+    // Unimplemented entities can be uncommented once their classes are defined:
+    // public IMongoCollection<ActivityLog> ActivityLogs => _database.GetCollection<ActivityLog>("ActivityLogs");
+    // public IMongoCollection<Allocation> Allocations => _database.GetCollection<Allocation>("Allocations");
+    // public IMongoCollection<Asset> Assets => _database.GetCollection<Asset>("Assets");
+    // public IMongoCollection<AssetCategory> AssetCategories => _database.GetCollection<AssetCategory>("AssetCategories");
+    // public IMongoCollection<AuditCycle> AuditCycles => _database.GetCollection<AuditCycle>("AuditCycles");
+    // public IMongoCollection<Booking> Bookings => _database.GetCollection<Booking>("Bookings");
+    // public IMongoCollection<Employee> Employees => _database.GetCollection<Employee>("Employees");
+    // public IMongoCollection<MaintenanceRequest> MaintenanceRequests => _database.GetCollection<MaintenanceRequest>("MaintenanceRequests");
+    // public IMongoCollection<Notification> Notifications => _database.GetCollection<Notification>("Notifications");
+    // public IMongoCollection<TransferRequest> TransferRequests => _database.GetCollection<TransferRequest>("TransferRequests");
 }

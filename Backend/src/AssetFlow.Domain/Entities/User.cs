@@ -1,6 +1,6 @@
 using AssetFlow.Domain.Enums;
 
-namespace AssetFlow.Domain.Entities;
+ namespace AssetFlow.Domain.Entities;
 
 public class User : BaseEntity
 {

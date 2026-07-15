@@ -11,7 +11,7 @@ public class UserRepository : IUserRepository
 
     public UserRepository(MongoDbContext context)
     {
-        _users = context.Database.GetCollection<User>("Users");
+        _users = context.Users;
     }
 
     public async Task CreateAsync(User user)

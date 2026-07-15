@@ -7,6 +7,10 @@ using AssetFlow.Infrastructure.Repositories;
 using AssetFlow.Application.Features.Auth.Interfaces;
 using AssetFlow.Application.Features.Auth.Services;
 using AssetFlow.Infrastructure.Authentication;
+using AssetFlow.Application.Features.Departments.Services;
+using AssetFlow.Application.Features.Departments.Interfaces;
+using AssetFlow.Application.Features.Employees.Services;
+using AssetFlow.Application.Features.Employees.Interfaces;
 namespace AssetFlow.Infrastructure.DependencyInjection;
 
 public static class DependencyInjection
@@ -21,9 +25,12 @@ public static class DependencyInjection
         services.AddSingleton<MongoDbContext>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAuthService, AuthService>();
-services.AddScoped<IPasswordHasher, PasswordHasher>();
-services.AddScoped<IJwtTokenService, JwtTokenService>();
-
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services.AddScoped<IDepartmentService, DepartmentService>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
         return services;
     }
 }
