@@ -25,7 +25,7 @@ public class MongoDbContext
     // public IMongoCollection<ActivityLog> ActivityLogs => _database.GetCollection<ActivityLog>("ActivityLogs");
     // public IMongoCollection<Allocation> Allocations => _database.GetCollection<Allocation>("Allocations");
     // public IMongoCollection<Asset> Assets => _database.GetCollection<Asset>("Assets");
-    // public IMongoCollection<AssetCategory> AssetCategories => _database.GetCollection<AssetCategory>("AssetCategories");
+    public IMongoCollection<AssetCategory> AssetCategories => Database.GetCollection<AssetCategory>("AssetCategories");
     // public IMongoCollection<AuditCycle> AuditCycles => _database.GetCollection<AuditCycle>("AuditCycles");
     // public IMongoCollection<Booking> Bookings => _database.GetCollection<Booking>("Bookings");
     // public IMongoCollection<Employee> Employees => _database.GetCollection<Employee>("Employees");
