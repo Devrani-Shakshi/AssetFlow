@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AssetFlow.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5057732bad58ca8bfd2fd1bbcd34cc6e8b4de13c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bdbe6ef015564af67298638ed28916f92c2cd27")]
 [assembly: System.Reflection.AssemblyProductAttribute("AssetFlow.IntegrationTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AssetFlow.IntegrationTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

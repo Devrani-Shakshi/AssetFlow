@@ -598,7 +598,10 @@
         },
         "runtime": {
           "bin/placeholder/AssetFlow.Infrastructure.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },

@@ -87,6 +87,9 @@ builder.Services
 // Authorization
 builder.Services.AddAuthorization();
 
+// HttpContext Accessor for Audit Logging
+builder.Services.AddHttpContextAccessor();
+
 // Dependency Injection
 builder.Services.AddInfrastructure(builder.Configuration);
 
