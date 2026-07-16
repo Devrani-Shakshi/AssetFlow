@@ -24,6 +24,18 @@ builder.Services.AddControllers(options =>
 // API Explorer
 builder.Services.AddEndpointsApiExplorer();
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 // Swagger
 builder.Services.AddSwaggerGen(options =>
 {
@@ -110,6 +122,8 @@ var app = builder.Build();
 #region Middleware
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
+
+app.UseCors("AllowFrontend");
 
 if (app.Environment.IsDevelopment())
 {

@@ -19,7 +19,7 @@ services:
       - "5113:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - MongoDbSettings__ConnectionString=mongodb://mongo:27017/
+      - MongoDbSettings__ConnectionString=mongodb+srv://StudyBuddy:StudyBuddyPass121@studybuddy.nmveevk.mongodb.net/
       - MongoDbSettings__DatabaseName=AssetFlow
       - Jwt__Key=THIS_IS_MY_SUPER_SECRET_KEY_FOR_ASSETFLOW_2026
       - Jwt__Issuer=AssetFlow
