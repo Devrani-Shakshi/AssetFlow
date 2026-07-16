@@ -1,0 +1,100 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [opened]="isSidebarOpened()" class="sidenav">
+    <div class="logo-container">
+      <mat-icon class="logo-icon">account_balance</mat-icon>
+      <span class="logo-text">AssetFlow</span>
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+      
+      <a mat-list-item [routerLink]="['/departments']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>corporate_fare</mat-icon>
+        <span matListItemTitle>Departments</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/employees']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>people</mat-icon>
+        <span matListItemTitle>Employees</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/vendors']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>store</mat-icon>
+        <span matListItemTitle>Vendors</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/categories']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>category</mat-icon>
+        <span matListItemTitle>Categories</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/locations']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>place</mat-icon>
+        <span matListItemTitle>Locations</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/assets']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>devices</mat-icon>
+        <span matListItemTitle>Assets</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/allocations']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>assignment_turned_in</mat-icon>
+        <span matListItemTitle>Allocations</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/transfers']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>swap_horiz</mat-icon>
+        <span matListItemTitle>Transfers</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/returns']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>assignment_return</mat-icon>
+        <span matListItemTitle>Returns</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/maintenance']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>build</mat-icon>
+        <span matListItemTitle>Maintenance</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/disposal']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>delete_sweep</mat-icon>
+        <span matListItemTitle>Disposal</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/reports']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>bar_chart</mat-icon>
+        <span matListItemTitle>Reports</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/notifications']" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>notifications</mat-icon>
+        <span matListItemTitle>Notifications</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="flex-spacer"></span>
+
+      <div class="user-profile" *ngIf="currentUser()">
+        <span class="username">{{ currentUser()?.fullName }}</span>
+        <button mat-icon-button (click)="logout()" title="Logout">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <div class="page-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
