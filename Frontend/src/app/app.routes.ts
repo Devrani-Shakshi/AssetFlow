@@ -33,8 +33,18 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },
-      // Placeholder routes redirecting layout pages to the Dashboard component
-      { path: 'departments', component: DashboardComponent },
+      {
+        path: 'departments',
+        loadComponent: () => import('./features/departments/pages/list/department-list.component').then(m => m.DepartmentListComponent)
+      },
+      {
+        path: 'departments/create',
+        loadComponent: () => import('./features/departments/pages/create/department-create.component').then(m => m.DepartmentCreateComponent)
+      },
+      {
+        path: 'departments/edit/:id',
+        loadComponent: () => import('./features/departments/pages/edit/department-edit.component').then(m => m.DepartmentEditComponent)
+      },
       { path: 'employees', component: DashboardComponent },
       { path: 'vendors', component: DashboardComponent },
       { path: 'categories', component: DashboardComponent },

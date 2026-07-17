@@ -25,6 +25,12 @@ services:
       - Jwt__Issuer=AssetFlow
       - Jwt__Audience=AssetFlowUsers
       - Jwt__ExpiryMinutes=60
+      - EmailSettings__SmtpServer=smtp.gmail.com
+      - EmailSettings__Port=587
+      - EmailSettings__SenderEmail=shakshi@zealousys.com
+      - EmailSettings__SenderName=AssetFlow Support
+      - EmailSettings__Username=shakshi@zealousys.com
+      - EmailSettings__Password=hjih xbhd fagc lyyx
     depends_on:
       - mongo
 

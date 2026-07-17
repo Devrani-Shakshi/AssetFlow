@@ -1,7 +1,7 @@
 export const environment = {
-  production: true,
+  production: false,
 
-  apiUrl: 'https://your-production-api.com/api',
+  apiUrl: 'http://localhost:5113/api',
 
   appName: 'AssetFlow'
 };

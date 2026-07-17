@@ -20,6 +20,7 @@ public class MongoDbContext
 
     public IMongoCollection<User> Users => Database.GetCollection<User>("Users");
     public IMongoCollection<Department> Departments => Database.GetCollection<Department>("Departments");
+    public IMongoCollection<PasswordResetToken> PasswordResetTokens => Database.GetCollection<PasswordResetToken>("PasswordResetTokens");
 
     // Unimplemented entities can be uncommented once their classes are defined:
     // public IMongoCollection<ActivityLog> ActivityLogs => _database.GetCollection<ActivityLog>("ActivityLogs");

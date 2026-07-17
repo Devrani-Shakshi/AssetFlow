@@ -26,13 +26,35 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
     [HttpPost("login")]
-public async Task<IActionResult> Login(LoginRequest request)
-{
-    var result = await _authService.LoginAsync(request);
+    public async Task<IActionResult> Login(LoginRequest request)
+    {
+        var result = await _authService.LoginAsync(request);
 
-    if (!result.Success)
-        return Unauthorized(result);
+        if (!result.Success)
+            return Unauthorized(result);
 
-    return Ok(result);
-}
+        return Ok(result);
+    }
+
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+    {
+        var result = await _authService.ForgotPasswordAsync(request);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+    {
+        var result = await _authService.ResetPasswordAsync(request);
+
+        if (!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
 }

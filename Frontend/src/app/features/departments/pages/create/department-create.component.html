@@ -1,0 +1,65 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Create Department</h1>
+      <p class="subtitle">Add a new department to the enterprise system</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/departments']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="department-form">
+        <div class="form-row">
+          <!-- Code -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Department Code</mat-label>
+            <input matInput formControlName="code" placeholder="e.g. HR, IT-ENG">
+            <mat-error *ngIf="createForm.get('code')?.hasError('required')">Code is required</mat-error>
+            <mat-error *ngIf="createForm.get('code')?.hasError('maxlength')">Code cannot exceed 20 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Name -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Department Name</mat-label>
+            <input matInput formControlName="name" placeholder="e.g. Human Resources">
+            <mat-error *ngIf="createForm.get('name')?.hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="createForm.get('name')?.hasError('maxlength')">Name cannot exceed 100 characters</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Manager -->
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Department Manager</mat-label>
+          <mat-select formControlName="managerId">
+            <mat-option [value]="null">None</mat-option>
+            @for (emp of employees; track emp.id) {
+              <mat-option [value]="emp.id">{{ emp.fullName }} ({{ emp.employeeCode }})</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" rows="4" placeholder="Enter department description..."></textarea>
+          <mat-error *ngIf="createForm.get('description')?.hasError('maxlength')">Description cannot exceed 500 characters</mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-button type="button" [routerLink]="['/departments']" [disabled]="isSubmitting">Cancel</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+            @if (isSubmitting) {
+              <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+            } @else {
+              Create Department
+            }
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

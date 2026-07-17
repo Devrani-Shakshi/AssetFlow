@@ -38,6 +38,7 @@ using AssetFlow.Application.Features.Audit.Services;
 using AssetFlow.Application.Features.Audit.Interfaces;
 using AssetFlow.Application.Features.Statistics.Services;
 using AssetFlow.Application.Features.Statistics.Interfaces;
+using AssetFlow.Infrastructure.Email;
 namespace AssetFlow.Infrastructure.DependencyInjection;
 
 public static class DependencyInjection
@@ -49,13 +50,18 @@ public static class DependencyInjection
         services.Configure<MongoDbSettings>(
             configuration.GetSection("MongoDbSettings"));
 
+        services.Configure<EmailSettings>(
+            configuration.GetSection("EmailSettings"));
+
         services.AddSingleton<MongoDbContext>();
         services.AddAutoMapper(typeof(AssetFlow.Application.Common.MappingProfile).Assembly);
         services.AddValidatorsFromAssembly(typeof(AssetFlow.Application.Features.Assets.Validators.CreateAssetRequestValidator).Assembly);
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPasswordResetTokenRepository, PasswordResetTokenRepository>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
