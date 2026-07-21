@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -8,13 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DepartmentService } from '../../../../core/services/department.service';
 import { Department } from '../../../../core/models/department.model';
 import { ConfirmDialogComponent } from '../../../../shared/dialogs/confirm-dialog/confirm-dialog.component';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-department-list',
@@ -29,7 +29,6 @@ import { ConfirmDialogComponent } from '../../../../shared/dialogs/confirm-dialo
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule,
     MatDialogModule,
     MatChipsModule,
     MatProgressSpinnerModule
@@ -40,15 +39,31 @@ import { ConfirmDialogComponent } from '../../../../shared/dialogs/confirm-dialo
 export class DepartmentListComponent implements OnInit {
   private readonly departmentService = inject(DepartmentService);
   private readonly router = inject(Router);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly notification = inject(NotificationService);
   private readonly dialog = inject(MatDialog);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   displayedColumns: string[] = ['code', 'name', 'description', 'isActive', 'actions'];
   dataSource = new MatTableDataSource<Department>([]);
   isLoading = true;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  private paginator!: MatPaginator;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    if (mp) {
+      this.paginator = mp;
+      this.dataSource.paginator = this.paginator;
+      this.cdr.markForCheck();
+    }
+  }
+
+  private sort!: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    if (ms) {
+      this.sort = ms;
+      this.dataSource.sort = this.sort;
+      this.cdr.markForCheck();
+    }
+  }
 
   ngOnInit(): void {
     this.loadDepartments();
@@ -56,24 +71,18 @@ export class DepartmentListComponent implements OnInit {
 
   loadDepartments(): void {
     this.isLoading = true;
+    this.cdr.markForCheck();
+    
     this.departmentService.getAll().subscribe({
       next: (data) => {
         this.dataSource.data = data;
-        setTimeout(() => {
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-          this.isLoading = false;
-        });
+        this.isLoading = false;
+        this.cdr.markForCheck();
       },
       error: (err) => {
-        this.snackBar.open(err.error?.message || 'Failed to load departments.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
-        setTimeout(() => {
-          this.isLoading = false;
-        });
+        this.notification.error(err.error?.message || 'Failed to load departments.');
+        this.isLoading = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -85,6 +94,7 @@ export class DepartmentListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+    this.cdr.markForCheck();
   }
 
   navigateToAdd(): void {
@@ -108,19 +118,12 @@ export class DepartmentListComponent implements OnInit {
       if (confirmed) {
         this.departmentService.delete(department.id).subscribe({
           next: () => {
-            this.snackBar.open('Department deleted successfully.', 'Close', {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'top'
-            });
+            this.notification.success('Department deleted successfully.');
             this.loadDepartments();
           },
           error: (err) => {
-            this.snackBar.open(err.error?.message || 'Failed to delete department.', 'Close', {
-              duration: 3000,
-              horizontalPosition: 'right',
-              verticalPosition: 'top'
-            });
+            this.notification.error(err.error?.message || 'Failed to delete department.');
+            this.cdr.markForCheck();
           }
         });
       }

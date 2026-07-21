@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../../core/services/auth.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,7 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly notification = inject(NotificationService);
 
   readonly loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -60,11 +62,14 @@ export class LoginComponent {
     }).subscribe({
       next: () => {
         this.isLoading.set(false);
+        this.notification.success('Logged in successfully.');
         this.router.navigate(['/']);
       },
       error: (err: any) => {
         this.isLoading.set(false);
-        this.errorMessage.set(err.error?.message || 'Invalid email or password. Please try again.');
+        const errMsg = err.error?.message || 'Invalid email or password. Please try again.';
+        this.errorMessage.set(errMsg);
+        this.notification.error(errMsg);
       }
     });
   }

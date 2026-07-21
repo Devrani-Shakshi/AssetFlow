@@ -27,10 +27,10 @@ services:
       - Jwt__ExpiryMinutes=60
       - EmailSettings__SmtpServer=smtp.gmail.com
       - EmailSettings__Port=587
-      - EmailSettings__SenderEmail=shakshi@zealousys.com
+      - EmailSettings__SenderEmail=${SMTP_USERNAME:-YOUR_GMAIL_ADDRESS}
       - EmailSettings__SenderName=AssetFlow Support
-      - EmailSettings__Username=shakshi@zealousys.com
-      - EmailSettings__Password=hjih xbhd fagc lyyx
+      - EmailSettings__Username=${SMTP_USERNAME:-YOUR_GMAIL_ADDRESS}
+      - EmailSettings__Password=${SMTP_PASSWORD:-YOUR_GMAIL_APP_PASSWORD}
     depends_on:
       - mongo
 

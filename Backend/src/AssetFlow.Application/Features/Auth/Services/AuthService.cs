@@ -62,7 +62,10 @@ public class AuthService : IAuthService
             Success = true,
             Message = "Registration successful.",
             Token = token,
-            ExpiresAt = DateTime.UtcNow.AddMinutes(60)
+            ExpiresAt = DateTime.UtcNow.AddMinutes(60),
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName
         };
     }
 
@@ -86,7 +89,10 @@ public class AuthService : IAuthService
             Success = true,
             Message = "Login successful.",
             Token = token,
-            ExpiresAt = DateTime.UtcNow.AddMinutes(60)
+            ExpiresAt = DateTime.UtcNow.AddMinutes(60),
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName
         };
     }
 

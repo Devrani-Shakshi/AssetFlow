@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -8,11 +8,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DepartmentService } from '../../../../core/services/department.service';
 import { EmployeeService } from '../../../../core/services/employee.service';
 import { Employee } from '../../../../core/models/employee.model';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-department-create',
@@ -27,7 +27,6 @@ import { Employee } from '../../../../core/models/employee.model';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule,
     MatProgressSpinnerModule
   ],
   templateUrl: './department-create.component.html',
@@ -38,7 +37,8 @@ export class DepartmentCreateComponent implements OnInit {
   private readonly departmentService = inject(DepartmentService);
   private readonly employeeService = inject(EmployeeService);
   private readonly router = inject(Router);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly notification = inject(NotificationService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   createForm!: FormGroup;
   employees: Employee[] = [];
@@ -61,22 +61,18 @@ export class DepartmentCreateComponent implements OnInit {
 
   loadEmployees(): void {
     this.isLoadingEmployees = true;
+    this.cdr.markForCheck();
+    
     this.employeeService.getAll().subscribe({
       next: (data) => {
         this.employees = data;
-        setTimeout(() => {
-          this.isLoadingEmployees = false;
-        });
+        this.isLoadingEmployees = false;
+        this.cdr.markForCheck();
       },
       error: () => {
-        this.snackBar.open('Failed to load employees for manager selection.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
-        setTimeout(() => {
-          this.isLoadingEmployees = false;
-        });
+        this.notification.error('Failed to load employees for manager selection.');
+        this.isLoadingEmployees = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -85,22 +81,17 @@ export class DepartmentCreateComponent implements OnInit {
     if (this.createForm.invalid) return;
 
     this.isSubmitting = true;
+    this.cdr.markForCheck();
+    
     this.departmentService.create(this.createForm.value).subscribe({
       next: () => {
-        this.snackBar.open('Department created successfully.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.success('Department created successfully.');
         this.router.navigate(['/departments']);
       },
       error: (err) => {
-        this.snackBar.open(err.error?.message || 'Failed to create department.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.error(err.error?.message || 'Failed to create department.');
         this.isSubmitting = false;
+        this.cdr.markForCheck();
       }
     });
   }

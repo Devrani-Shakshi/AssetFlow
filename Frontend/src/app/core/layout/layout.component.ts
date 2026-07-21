@@ -6,7 +6,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../services/notification.service';
+import { ConfirmDialogComponent } from '../../shared/dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-layout',
@@ -18,13 +21,16 @@ import { AuthService } from '../services/auth.service';
     MatToolbarModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
   private readonly authService = inject(AuthService);
+  private readonly dialog = inject(MatDialog);
+  private readonly notification = inject(NotificationService);
 
   readonly currentUser = this.authService.currentUser;
   readonly isSidebarOpened = signal(true);
@@ -34,6 +40,19 @@ export class LayoutComponent {
   }
 
   logout(): void {
-    this.authService.logout();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Logout Confirmation',
+        message: 'Are you sure you want to log out?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.authService.logout();
+        this.notification.success('Logged out successfully.');
+      }
+    });
   }
 }

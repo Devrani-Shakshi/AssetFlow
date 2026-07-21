@@ -5454,11 +5454,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\tests\\AssetFlow.IntegrationTests\\AssetFlow.IntegrationTests.csproj",
+      "projectUniqueName": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\tests\\AssetFlow.IntegrationTests\\AssetFlow.IntegrationTests.csproj",
       "projectName": "AssetFlow.IntegrationTests",
-      "projectPath": "c:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\tests\\AssetFlow.IntegrationTests\\AssetFlow.IntegrationTests.csproj",
+      "projectPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\tests\\AssetFlow.IntegrationTests\\AssetFlow.IntegrationTests.csproj",
       "packagesPath": "C:\\Users\\shakshi.devrani\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\tests\\AssetFlow.IntegrationTests\\obj\\",
+      "outputPath": "C:\\Users\\shakshi.devrani\\Desktop\\AssetFlow\\Backend\\tests\\AssetFlow.IntegrationTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5529,7 +5529,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

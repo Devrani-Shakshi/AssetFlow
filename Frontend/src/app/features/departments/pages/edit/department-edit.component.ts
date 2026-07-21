@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -9,11 +9,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DepartmentService } from '../../../../core/services/department.service';
 import { EmployeeService } from '../../../../core/services/employee.service';
 import { Employee } from '../../../../core/models/employee.model';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-department-edit',
@@ -29,7 +29,6 @@ import { Employee } from '../../../../core/models/employee.model';
     MatButtonModule,
     MatIconModule,
     MatSlideToggleModule,
-    MatSnackBarModule,
     MatProgressSpinnerModule
   ],
   templateUrl: './department-edit.component.html',
@@ -41,7 +40,8 @@ export class DepartmentEditComponent implements OnInit {
   private readonly employeeService = inject(EmployeeService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly notification = inject(NotificationService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   editForm!: FormGroup;
   employees: Employee[] = [];
@@ -71,19 +71,19 @@ export class DepartmentEditComponent implements OnInit {
     this.employeeService.getAll().subscribe({
       next: (data) => {
         this.employees = data;
+        this.cdr.markForCheck();
       },
       error: () => {
-        this.snackBar.open('Failed to load employees for manager selection.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.error('Failed to load employees for manager selection.');
+        this.cdr.markForCheck();
       }
     });
   }
 
   loadDepartmentData(): void {
     this.isLoadingData = true;
+    this.cdr.markForCheck();
+    
     this.departmentService.getById(this.departmentId).subscribe({
       next: (dept) => {
         this.editForm.patchValue({
@@ -94,15 +94,13 @@ export class DepartmentEditComponent implements OnInit {
           isActive: dept.isActive
         });
         this.isLoadingData = false;
+        this.cdr.markForCheck();
       },
       error: () => {
-        this.snackBar.open('Failed to load department data.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.error('Failed to load department data.');
         this.router.navigate(['/departments']);
         this.isLoadingData = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -111,25 +109,19 @@ export class DepartmentEditComponent implements OnInit {
     if (this.editForm.invalid) return;
 
     this.isSubmitting = true;
-    // Extract raw values as 'code' is disabled and we want to include it or we can just send the raw values
+    this.cdr.markForCheck();
+    
     const payload = this.editForm.getRawValue();
 
     this.departmentService.update(payload).subscribe({
       next: () => {
-        this.snackBar.open('Department updated successfully.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.success('Department updated successfully.');
         this.router.navigate(['/departments']);
       },
       error: (err) => {
-        this.snackBar.open(err.error?.message || 'Failed to update department.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.error(err.error?.message || 'Failed to update department.');
         this.isSubmitting = false;
+        this.cdr.markForCheck();
       }
     });
   }

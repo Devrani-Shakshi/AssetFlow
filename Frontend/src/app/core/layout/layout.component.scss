@@ -40,28 +40,37 @@ mat-nav-list {
 a[mat-list-item] {
   margin: 4px 12px;
   border-radius: 8px;
-  color: #94a3b8;
   transition: all 0.2s ease-in-out;
   font-weight: 500;
   height: 48px;
 
+  span[matListItemTitle] {
+    color: #cbd5e1 !important;
+  }
+
   mat-icon {
-    color: #64748b;
+    color: #64748b !important;
   }
 }
 
 a[mat-list-item]:hover {
   background-color: #1e293b !important;
-  color: #ffffff;
+
+  span[matListItemTitle] {
+    color: #ffffff !important;
+  }
 
   mat-icon {
-    color: #ffffff;
+    color: #ffffff !important;
   }
 }
 
 .active-link {
   background-color: #3b82f6 !important;
-  color: #ffffff !important;
+
+  span[matListItemTitle] {
+    color: #ffffff !important;
+  }
 
   mat-icon {
     color: #ffffff !important;

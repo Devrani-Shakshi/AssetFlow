@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../../core/services/auth.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -23,8 +23,7 @@ import { AuthService } from '../../../core/services/auth.service';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatProgressSpinnerModule
   ],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
@@ -32,7 +31,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class ForgotPasswordComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly notification = inject(NotificationService);
 
   readonly forgotForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]]
@@ -53,13 +52,11 @@ export class ForgotPasswordComponent {
         this.emailSent.set(email);
         this.isSubmitted.set(true);
         this.isLoading.set(false);
+        this.notification.success('Password reset link sent successfully.');
       },
       error: (err) => {
-        this.snackBar.open(err.error?.message || 'Failed to send reset link. Please try again.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        const errMsg = err.error?.message || 'Failed to send reset link. Please try again.';
+        this.notification.error(errMsg);
         this.isLoading.set(false);
       }
     });

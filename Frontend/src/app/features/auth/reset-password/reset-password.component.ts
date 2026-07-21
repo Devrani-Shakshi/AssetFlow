@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../../core/services/auth.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,8 +23,7 @@ import { AuthService } from '../../../core/services/auth.service';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatProgressSpinnerModule
   ],
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css']
@@ -33,7 +32,7 @@ export class ResetPasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly notification = inject(NotificationService);
   private readonly authService = inject(AuthService);
 
   readonly resetForm = this.fb.group({
@@ -47,11 +46,7 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token') || '';
     if (!this.token) {
-      this.snackBar.open('Invalid reset token or link. Please request a new link.', 'Close', {
-        duration: 5000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
-      });
+      this.notification.error('Invalid reset token or link. Please request a new link.');
       this.router.navigate(['/forgot-password']);
     }
   }
@@ -64,20 +59,13 @@ export class ResetPasswordComponent implements OnInit {
 
     this.authService.resetPassword(this.token, newPassword).subscribe({
       next: () => {
-        this.snackBar.open('Password reset successful! Please login with your new password.', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.notification.success('Password reset successful! Please login with your new password.');
         this.isLoading.set(false);
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        this.snackBar.open(err.error?.message || 'Failed to reset password. The link might have expired.', 'Close', {
-          duration: 4000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        const errMsg = err.error?.message || 'Failed to reset password. The link might have expired.';
+        this.notification.error(errMsg);
         this.isLoading.set(false);
       }
     });
