@@ -1,0 +1,83 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Return Asset</h1>
+      <p class="subtitle">Process the return of an allocated asset back to inventory</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/returns']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      @if (isLoadingData) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="return-form">
+          <div class="form-row">
+            <!-- Asset Selection -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Select Allocated Asset</mat-label>
+              <mat-select formControlName="assetId">
+                @for (a of assets; track a.id) {
+                  <mat-option [value]="a.id">{{ a.assetName }} ({{ a.assetCode }})</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('assetId')?.hasError('required')">Asset selection is required</mat-error>
+              @if (assets.length === 0) {
+                <mat-hint>No allocated assets available to return</mat-hint>
+              }
+            </mat-form-field>
+
+            <!-- Current Owner (Read-only status) -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Returning Owner</mat-label>
+              <input matInput [value]="currentOwnerName" readonly>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Condition -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Return Condition</mat-label>
+              <mat-select formControlName="condition">
+                @for (c of conditions; track c) {
+                  <mat-option [value]="c">{{ c }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('condition')?.hasError('required')">Condition is required</mat-error>
+            </mat-form-field>
+
+            <!-- Received By -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Received By</mat-label>
+              <input matInput formControlName="receivedBy" readonly>
+            </mat-form-field>
+          </div>
+
+          <!-- Remarks -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Remarks / Notes</mat-label>
+            <textarea matInput formControlName="remarks" rows="4" placeholder="Enter return remarks..."></textarea>
+            <mat-error *ngIf="createForm.get('remarks')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" [routerLink]="['/returns']" [disabled]="isSubmitting">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+              @if (isSubmitting) {
+                <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+              } @else {
+                Return Asset
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

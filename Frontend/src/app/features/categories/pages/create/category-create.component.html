@@ -1,0 +1,74 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Create Category</h1>
+      <p class="subtitle">Add a new classification category for enterprise assets</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/categories']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="category-form">
+        <div class="form-row">
+          <!-- Category Code -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Category Code</mat-label>
+            <input matInput formControlName="categoryCode" placeholder="e.g. LAP, FURN">
+            <mat-error *ngIf="createForm.get('categoryCode')?.hasError('required')">Code is required</mat-error>
+            <mat-error *ngIf="createForm.get('categoryCode')?.hasError('maxlength')">Cannot exceed 20 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Category Name -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Category Name</mat-label>
+            <input matInput formControlName="categoryName" placeholder="e.g. Laptops, Office Furniture">
+            <mat-error *ngIf="createForm.get('categoryName')?.hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="createForm.get('categoryName')?.hasError('maxlength')">Cannot exceed 100 characters</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <!-- Depreciation Rate -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Depreciation Rate (%)</mat-label>
+            <input matInput type="number" formControlName="depreciationRate" placeholder="e.g. 15">
+            <mat-error *ngIf="createForm.get('depreciationRate')?.hasError('required')">Depreciation rate is required</mat-error>
+            <mat-error *ngIf="createForm.get('depreciationRate')?.hasError('min')">Must be 0 or higher</mat-error>
+            <mat-error *ngIf="createForm.get('depreciationRate')?.hasError('max')">Cannot exceed 100</mat-error>
+          </mat-form-field>
+
+          <!-- Useful Life -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Useful Life (Years)</mat-label>
+            <input matInput type="number" formControlName="usefulLifeYears" placeholder="e.g. 5">
+            <mat-error *ngIf="createForm.get('usefulLifeYears')?.hasError('required')">Useful life is required</mat-error>
+            <mat-error *ngIf="createForm.get('usefulLifeYears')?.hasError('min')">Must be at least 1 year</mat-error>
+            <mat-error *ngIf="createForm.get('usefulLifeYears')?.hasError('max')">Cannot exceed 100 years</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" rows="4" placeholder="Enter category description..."></textarea>
+          <mat-error *ngIf="createForm.get('description')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-button type="button" [routerLink]="['/categories']" [disabled]="isSubmitting">Cancel</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+            @if (isSubmitting) {
+              <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+            } @else {
+              Create Category
+            }
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

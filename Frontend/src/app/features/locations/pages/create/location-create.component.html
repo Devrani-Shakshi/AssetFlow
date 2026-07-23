@@ -1,0 +1,77 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Create Location</h1>
+      <p class="subtitle">Add a new physical storage or deployment location for assets</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/locations']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="location-form">
+        <div class="form-row">
+          <!-- Location Code -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Location Code</mat-label>
+            <input matInput formControlName="locationCode" placeholder="e.g. LOC-HQ-FL1">
+            <mat-error *ngIf="createForm.get('locationCode')?.hasError('required')">Code is required</mat-error>
+            <mat-error *ngIf="createForm.get('locationCode')?.hasError('maxlength')">Cannot exceed 20 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Location Name -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Location Name</mat-label>
+            <input matInput formControlName="locationName" placeholder="e.g. Headquarters First Floor">
+            <mat-error *ngIf="createForm.get('locationName')?.hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="createForm.get('locationName')?.hasError('maxlength')">Cannot exceed 100 characters</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row three-cols">
+          <!-- Building -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Building</mat-label>
+            <input matInput formControlName="building" placeholder="e.g. Tower A">
+            <mat-error *ngIf="createForm.get('building')?.hasError('maxlength')">Cannot exceed 50 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Floor -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Floor</mat-label>
+            <input matInput formControlName="floor" placeholder="e.g. 1st Floor">
+            <mat-error *ngIf="createForm.get('floor')?.hasError('maxlength')">Cannot exceed 50 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Room -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Room / Cubicle</mat-label>
+            <input matInput formControlName="room" placeholder="e.g. Server Room, Room 104">
+            <mat-error *ngIf="createForm.get('room')?.hasError('maxlength')">Cannot exceed 50 characters</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" rows="4" placeholder="Enter location description..."></textarea>
+          <mat-error *ngIf="createForm.get('description')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-button type="button" [routerLink]="['/locations']" [disabled]="isSubmitting">Cancel</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+            @if (isSubmitting) {
+              <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+            } @else {
+              Create Location
+            }
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

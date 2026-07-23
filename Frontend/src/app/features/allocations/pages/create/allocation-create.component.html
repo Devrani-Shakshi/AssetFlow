@@ -1,0 +1,88 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Allocate Asset</h1>
+      <p class="subtitle">Assign an available asset to a specific staff member and department</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/allocations']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      @if (isLoadingData) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="allocation-form">
+          <div class="form-row">
+            <!-- Asset Selection -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Select Asset</mat-label>
+              <mat-select formControlName="assetId">
+                @for (a of assets; track a.id) {
+                  <mat-option [value]="a.id">{{ a.assetName }} ({{ a.assetCode }})</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('assetId')?.hasError('required')">Asset is required</mat-error>
+              @if (assets.length === 0) {
+                <mat-hint>No available assets left to allocate</mat-hint>
+              }
+            </mat-form-field>
+
+            <!-- Employee Selection -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Assign To Employee</mat-label>
+              <mat-select formControlName="employeeId">
+                @for (e of employees; track e.id) {
+                  <mat-option [value]="e.id">{{ e.firstName }} {{ e.lastName }} ({{ e.employeeCode }})</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('employeeId')?.hasError('required')">Employee is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Department (autofilled or manual select) -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Department</mat-label>
+              <mat-select formControlName="departmentId">
+                @for (d of departments; track d.id) {
+                  <mat-option [value]="d.id">{{ d.name }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('departmentId')?.hasError('required')">Department is required</mat-error>
+            </mat-form-field>
+
+            <!-- Allocated By -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Allocated By</mat-label>
+              <input matInput formControlName="allocatedBy" readonly>
+            </mat-form-field>
+          </div>
+
+          <!-- Remarks -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Remarks / Notes</mat-label>
+            <textarea matInput formControlName="remarks" rows="4" placeholder="Enter reason or details..."></textarea>
+            <mat-error *ngIf="createForm.get('remarks')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" [routerLink]="['/allocations']" [disabled]="isSubmitting">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+              @if (isSubmitting) {
+                <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+              } @else {
+                Allocate Asset
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

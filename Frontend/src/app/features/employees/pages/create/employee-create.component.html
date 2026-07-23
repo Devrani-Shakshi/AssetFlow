@@ -1,0 +1,120 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Create Employee</h1>
+      <p class="subtitle">Add a new staff member to the enterprise system</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/employees']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      @if (isLoadingLists) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="employee-form">
+          <div class="form-row">
+            <!-- Employee Code -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Employee Code</mat-label>
+              <input matInput formControlName="employeeCode" placeholder="e.g. EMP-101">
+              <mat-error *ngIf="createForm.get('employeeCode')?.hasError('required')">Code is required</mat-error>
+              <mat-error *ngIf="createForm.get('employeeCode')?.hasError('maxlength')">Code cannot exceed 20 characters</mat-error>
+            </mat-form-field>
+
+            <!-- Designation -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Designation</mat-label>
+              <input matInput formControlName="designation" placeholder="e.g. Software Engineer">
+              <mat-error *ngIf="createForm.get('designation')?.hasError('required')">Designation is required</mat-error>
+              <mat-error *ngIf="createForm.get('designation')?.hasError('maxlength')">Designation cannot exceed 100 characters</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- First Name -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" placeholder="e.g. John">
+              <mat-error *ngIf="createForm.get('firstName')?.hasError('required')">First Name is required</mat-error>
+              <mat-error *ngIf="createForm.get('firstName')?.hasError('maxlength')">Cannot exceed 50 characters</mat-error>
+            </mat-form-field>
+
+            <!-- Last Name -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" placeholder="e.g. Doe">
+              <mat-error *ngIf="createForm.get('lastName')?.hasError('required')">Last Name is required</mat-error>
+              <mat-error *ngIf="createForm.get('lastName')?.hasError('maxlength')">Cannot exceed 50 characters</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Email -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Email Address</mat-label>
+              <input matInput type="email" formControlName="email" placeholder="e.g. john.doe@company.com">
+              <mat-error *ngIf="createForm.get('email')?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="createForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+            </mat-form-field>
+
+            <!-- Phone Number -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" placeholder="e.g. +1 555-0199">
+              <mat-error *ngIf="createForm.get('phoneNumber')?.hasError('required')">Phone is required</mat-error>
+              <mat-error *ngIf="createForm.get('phoneNumber')?.hasError('pattern')">Invalid phone format</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Department -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Department</mat-label>
+              <mat-select formControlName="departmentId">
+                @for (dept of departments; track dept.id) {
+                  <mat-option [value]="dept.id">{{ dept.name }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('departmentId')?.hasError('required')">Department is required</mat-error>
+            </mat-form-field>
+
+            <!-- Joining Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Joining Date</mat-label>
+              <input matInput type="date" formControlName="joiningDate">
+              <mat-error *ngIf="createForm.get('joiningDate')?.hasError('required')">Joining Date is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Manager selection -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Reporting Manager</mat-label>
+            <mat-select formControlName="managerId">
+              <mat-option [value]="null">None</mat-option>
+              @for (emp of employees; track emp.id) {
+                <mat-option [value]="emp.id">{{ emp.firstName }} {{ emp.lastName }} ({{ emp.employeeCode }})</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" [routerLink]="['/employees']" [disabled]="isSubmitting">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+              @if (isSubmitting) {
+                <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+              } @else {
+                Create Employee
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

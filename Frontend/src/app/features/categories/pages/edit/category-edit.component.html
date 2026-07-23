@@ -1,0 +1,85 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Edit Category</h1>
+      <p class="subtitle">Modify asset category details and settings</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/categories']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      @if (isLoadingData) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="category-form">
+          <div class="form-row">
+            <!-- Category Code -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Category Code</mat-label>
+              <input matInput formControlName="categoryCode">
+            </mat-form-field>
+
+            <!-- Category Name -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Category Name</mat-label>
+              <input matInput formControlName="categoryName" placeholder="e.g. Laptops, Office Furniture">
+              <mat-error *ngIf="editForm.get('categoryName')?.hasError('required')">Name is required</mat-error>
+              <mat-error *ngIf="editForm.get('categoryName')?.hasError('maxlength')">Cannot exceed 100 characters</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Depreciation Rate -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Depreciation Rate (%)</mat-label>
+              <input matInput type="number" formControlName="depreciationRate" placeholder="e.g. 15">
+              <mat-error *ngIf="editForm.get('depreciationRate')?.hasError('required')">Depreciation rate is required</mat-error>
+              <mat-error *ngIf="editForm.get('depreciationRate')?.hasError('min')">Must be 0 or higher</mat-error>
+              <mat-error *ngIf="editForm.get('depreciationRate')?.hasError('max')">Cannot exceed 100</mat-error>
+            </mat-form-field>
+
+            <!-- Useful Life -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Useful Life (Years)</mat-label>
+              <input matInput type="number" formControlName="usefulLifeYears" placeholder="e.g. 5">
+              <mat-error *ngIf="editForm.get('usefulLifeYears')?.hasError('required')">Useful life is required</mat-error>
+              <mat-error *ngIf="editForm.get('usefulLifeYears')?.hasError('min')">Must be at least 1 year</mat-error>
+              <mat-error *ngIf="editForm.get('usefulLifeYears')?.hasError('max')">Cannot exceed 100 years</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Description -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="4" placeholder="Enter category description..."></textarea>
+            <mat-error *ngIf="editForm.get('description')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Status toggle -->
+          <div class="status-toggle-container">
+            <mat-slide-toggle formControlName="isActive" color="primary">
+              Category Status: {{ editForm.get('isActive')?.value ? 'Active' : 'Inactive' }}
+            </mat-slide-toggle>
+          </div>
+
+          <div class="form-actions">
+            <button mat-button type="button" [routerLink]="['/categories']" [disabled]="isSubmitting">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid || isSubmitting">
+              @if (isSubmitting) {
+                <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+              } @else {
+                Save Changes
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>
