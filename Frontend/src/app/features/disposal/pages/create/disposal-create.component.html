@@ -1,0 +1,102 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Dispose Asset</h1>
+      <p class="subtitle">Decommission, scrap, sell or donate an asset from organization directory</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/disposal']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      @if (isLoadingData) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="disposal-form">
+          <div class="form-row">
+            <!-- Asset Selection -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Select Asset</mat-label>
+              <mat-select formControlName="assetId">
+                @for (a of assets; track a.id) {
+                  <mat-option [value]="a.id">{{ a.assetName }} ({{ a.assetCode }})</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('assetId')?.hasError('required')">Asset is required</mat-error>
+              @if (assets.length === 0) {
+                <mat-hint>No available assets left to dispose</mat-hint>
+              }
+            </mat-form-field>
+
+            <!-- Disposal Method -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Disposal Method</mat-label>
+              <mat-select formControlName="disposalMethod">
+                @for (m of disposalMethods; track m) {
+                  <mat-option [value]="m">{{ m }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="createForm.get('disposalMethod')?.hasError('required')">Method is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Disposal Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Disposal Date</mat-label>
+              <input matInput type="date" formControlName="disposalDate">
+              <mat-error *ngIf="createForm.get('disposalDate')?.hasError('required')">Date is required</mat-error>
+            </mat-form-field>
+
+            <!-- Amount Recovered -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Amount Recovered ($)</mat-label>
+              <input matInput type="number" formControlName="amountRecovered">
+              <mat-error *ngIf="createForm.get('amountRecovered')?.hasError('required')">Amount is required</mat-error>
+              <mat-error *ngIf="createForm.get('amountRecovered')?.hasError('min')">Must be positive</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Reason -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Reason for Disposal</mat-label>
+              <input matInput formControlName="reason" placeholder="e.g. Obsolete hardware, Broken screen">
+              <mat-error *ngIf="createForm.get('reason')?.hasError('required')">Reason is required</mat-error>
+              <mat-error *ngIf="createForm.get('reason')?.hasError('maxlength')">Cannot exceed 250 characters</mat-error>
+            </mat-form-field>
+
+            <!-- Approved By -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Approved By</mat-label>
+              <input matInput formControlName="approvedBy" readonly>
+            </mat-form-field>
+          </div>
+
+          <!-- Remarks -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Remarks / Notes</mat-label>
+            <textarea matInput formControlName="remarks" rows="3" placeholder="Enter disposal remarks..."></textarea>
+            <mat-error *ngIf="createForm.get('remarks')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" [routerLink]="['/disposal']" [disabled]="isSubmitting">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid || isSubmitting">
+              @if (isSubmitting) {
+                <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+              } @else {
+                Dispose Asset
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,128 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Edit Maintenance Record</h1>
+      <p class="subtitle">Modify maintenance scheduling, cost, status, or completion dates</p>
+    </div>
+    <button mat-stroked-button [routerLink]="['/maintenance']">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      @if (isLoadingData) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="maintenance-form">
+          <div class="form-row">
+            <!-- Asset Selection (disabled or read-only is preferred, but let's allow editing if logged wrong asset) -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Select Asset</mat-label>
+              <mat-select formControlName="assetId">
+                @for (a of assets; track a.id) {
+                  <mat-option [value]="a.id">{{ a.assetName }} ({{ a.assetCode }})</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="editForm.get('assetId')?.hasError('required')">Asset is required</mat-error>
+            </mat-form-field>
+
+            <!-- Vendor Selection -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Service Provider (Vendor)</mat-label>
+              <mat-select formControlName="vendorId">
+                @for (v of vendors; track v.id) {
+                  <mat-option [value]="v.id">{{ v.vendorName }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="editForm.get('vendorId')?.hasError('required')">Vendor is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Maintenance Type -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Maintenance Type</mat-label>
+              <mat-select formControlName="maintenanceType">
+                @for (type of maintenanceTypes; track type) {
+                  <mat-option [value]="type">{{ type }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="editForm.get('maintenanceType')?.hasError('required')">Type is required</mat-error>
+            </mat-form-field>
+
+            <!-- Cost -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Cost ($)</mat-label>
+              <input matInput type="number" formControlName="cost">
+              <mat-error *ngIf="editForm.get('cost')?.hasError('required')">Cost is required</mat-error>
+              <mat-error *ngIf="editForm.get('cost')?.hasError('min')">Must be positive</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row three-cols">
+            <!-- Maintenance Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Start Date</mat-label>
+              <input matInput type="date" formControlName="maintenanceDate">
+              <mat-error *ngIf="editForm.get('maintenanceDate')?.hasError('required')">Start date is required</mat-error>
+            </mat-form-field>
+
+            <!-- Expected Completion Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Expected Completion</mat-label>
+              <input matInput type="date" formControlName="expectedCompletionDate">
+            </mat-form-field>
+
+            <!-- Completed Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Completed Date</mat-label>
+              <input matInput type="date" formControlName="completedDate">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <!-- Status -->
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                @for (s of statuses; track s) {
+                  <mat-option [value]="s">{{ s }}</mat-option>
+                }
+              </mat-select>
+              <mat-error *ngIf="editForm.get('status')?.hasError('required')">Status is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Description -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Description of Issue / Work</mat-label>
+            <textarea matInput formControlName="description" rows="3" placeholder="Describe the maintenance requirements..."></textarea>
+            <mat-error *ngIf="editForm.get('description')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+          </mat-form-field>
+
+          <!-- Remarks -->
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Remarks / Notes</mat-label>
+            <textarea matInput formControlName="remarks" rows="2" placeholder="Additional notes..."></textarea>
+            <mat-error *ngIf="editForm.get('remarks')?.hasError('maxlength')">Cannot exceed 500 characters</mat-error>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" [routerLink]="['/maintenance']" [disabled]="isSubmitting">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="editForm.invalid || isSubmitting">
+              @if (isSubmitting) {
+                <mat-spinner diameter="20" class="spinner-btn"></mat-spinner>
+              } @else {
+                Save Changes
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

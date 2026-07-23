@@ -1,0 +1,53 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>System Notifications</h1>
+      <p class="subtitle">Stay updated with critical asset allocations, warranties, and alerts</p>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else {
+    @if (notifications.length === 0) {
+      <mat-card class="empty-card">
+        <mat-card-content>
+          <mat-icon class="empty-icon">notifications_off</mat-icon>
+          <h3>All caught up!</h3>
+          <p>You have no active system notifications at the moment.</p>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="notifications-list">
+        @for (n of notifications; track n.id) {
+          <mat-card class="notification-item" [class.unread]="!n.isRead">
+            <mat-card-content>
+              <div class="item-wrapper">
+                <mat-icon class="status-icon" [class]="getIconClass(n.type)">{{ getIcon(n.type) }}</mat-icon>
+                <div class="content-wrapper">
+                  <div class="item-header">
+                    <h3 class="notification-title">{{ n.title }}</h3>
+                    <span class="time-stamp">{{ n.createdAt | date:'short' }}</span>
+                  </div>
+                  <p class="notification-msg">{{ n.message }}</p>
+                </div>
+                <div class="actions-wrapper">
+                  @if (!n.isRead) {
+                    <button mat-stroked-button color="primary" class="read-btn" (click)="markAsRead(n)">
+                      Mark read
+                    </button>
+                  }
+                  <button mat-icon-button color="warn" (click)="deleteNotification(n.id)" matTooltip="Delete notification">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</div>

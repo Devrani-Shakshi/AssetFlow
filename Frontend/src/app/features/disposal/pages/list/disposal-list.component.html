@@ -1,0 +1,93 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Asset Disposal</h1>
+      <p class="subtitle">Log and track assets decommissioned, sold, or scrapped</p>
+    </div>
+    <button mat-flat-button color="primary" (click)="navigateToAdd()">
+      <mat-icon>delete_forever</mat-icon>
+      Dispose Asset
+    </button>
+  </div>
+
+  <div class="filter-bar">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search disposals...</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by asset, reason or method" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  @if (isLoading) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else {
+    <div class="mat-elevation-z1 table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Asset Code Column -->
+        <ng-container matColumnDef="assetCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Asset Code </th>
+          <td mat-cell *matCellDef="let row" class="code-cell"> {{row.assetCode}} </td>
+        </ng-container>
+
+        <!-- Asset Name Column -->
+        <ng-container matColumnDef="assetName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Asset Name </th>
+          <td mat-cell *matCellDef="let row" class="name-cell"> {{row.assetName}} </td>
+        </ng-container>
+
+        <!-- Disposal Date Column -->
+        <ng-container matColumnDef="disposalDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Disposal Date </th>
+          <td mat-cell *matCellDef="let row"> {{row.disposalDate | date:'mediumDate'}} </td>
+        </ng-container>
+
+        <!-- Reason Column -->
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reason </th>
+          <td mat-cell *matCellDef="let row"> {{row.reason}} </td>
+        </ng-container>
+
+        <!-- Method Column -->
+        <ng-container matColumnDef="disposalMethod">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Method </th>
+          <td mat-cell *matCellDef="let row"> {{row.disposalMethod}} </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amountRecovered">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Recovered ($) </th>
+          <td mat-cell *matCellDef="let row"> {{row.amountRecovered | currency}} </td>
+        </ng-container>
+
+        <!-- Approved Column -->
+        <ng-container matColumnDef="approvedBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Approved By </th>
+          <td mat-cell *matCellDef="let row"> {{row.approvedBy}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let row" class="actions-cell">
+            <button mat-icon-button color="warn" (click)="deleteRecord(row)" matTooltip="Delete record">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8">No disposal records found matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of disposals"></mat-paginator>
+    </div>
+  }
+</div>

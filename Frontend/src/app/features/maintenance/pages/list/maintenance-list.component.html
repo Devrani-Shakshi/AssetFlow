@@ -1,0 +1,100 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Asset Maintenance</h1>
+      <p class="subtitle">Log and track asset repairs, services, and scheduled inspections</p>
+    </div>
+    <button mat-flat-button color="primary" (click)="navigateToAdd()">
+      <mat-icon>build</mat-icon>
+      Schedule Maintenance
+    </button>
+  </div>
+
+  <div class="filter-bar">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search maintenance...</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by asset, type or vendor" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  @if (isLoading) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else {
+    <div class="mat-elevation-z1 table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Asset Code Column -->
+        <ng-container matColumnDef="assetCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Asset Code </th>
+          <td mat-cell *matCellDef="let row" class="code-cell"> {{row.assetCode}} </td>
+        </ng-container>
+
+        <!-- Asset Name Column -->
+        <ng-container matColumnDef="assetName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Asset Name </th>
+          <td mat-cell *matCellDef="let row" class="name-cell"> {{row.assetName}} </td>
+        </ng-container>
+
+        <!-- Vendor Column -->
+        <ng-container matColumnDef="vendorName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Provider </th>
+          <td mat-cell *matCellDef="let row"> {{row.vendorName}} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="maintenanceType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+          <td mat-cell *matCellDef="let row"> {{row.maintenanceType}} </td>
+        </ng-container>
+
+        <!-- Cost Column -->
+        <ng-container matColumnDef="cost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
+          <td mat-cell *matCellDef="let row"> {{row.cost | currency}} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-chip-option selectable="false" [class]="getStatusClass(row.status)">
+              {{row.status}}
+            </mat-chip-option>
+          </td>
+        </ng-container>
+
+        <!-- Expected Date Column -->
+        <ng-container matColumnDef="expectedCompletionDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Expected Due </th>
+          <td mat-cell *matCellDef="let row"> {{row.expectedCompletionDate | date:'mediumDate'}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let row" class="actions-cell">
+            <button mat-icon-button color="primary" (click)="navigateToEdit(row.id)" matTooltip="Edit record">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteRecord(row)" matTooltip="Delete record">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8">No maintenance records found matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of maintenance"></mat-paginator>
+    </div>
+  }
+</div>

@@ -1,0 +1,172 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-titles h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.header-titles .subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-item {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.notification-item.unread {
+  background-color: #f8fafc;
+  border-left: 4px solid #3b82f6 !important;
+}
+
+.item-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.status-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+}
+
+.icon-info {
+  color: #3b82f6;
+}
+
+.icon-warning {
+  color: #f59e0b;
+}
+
+.icon-danger {
+  color: #ef4444;
+}
+
+.icon-success {
+  color: #10b981;
+}
+
+.icon-default {
+  color: #64748b;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.notification-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.time-stamp {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.notification-msg {
+  font-size: 14px;
+  color: #475569;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.actions-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.read-btn {
+  font-size: 12px;
+  height: 32px;
+  line-height: 30px;
+  padding: 0 12px;
+}
+
+.empty-card {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.empty-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.empty-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 4px 0;
+}
+
+.empty-card p {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+}
+
+@media (max-width: 600px) {
+  .item-wrapper {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .actions-wrapper {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

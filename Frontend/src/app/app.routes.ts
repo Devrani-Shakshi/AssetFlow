@@ -129,10 +129,42 @@ export const routes: Routes = [
         path: 'returns/create',
         loadComponent: () => import('./features/returns/pages/create/return-create.component').then(m => m.ReturnCreateComponent)
       },
-      { path: 'maintenance', component: DashboardComponent },
-      { path: 'disposal', component: DashboardComponent },
-      { path: 'reports', component: DashboardComponent },
-      { path: 'notifications', component: DashboardComponent }
+      {
+        path: 'maintenance',
+        loadComponent: () => import('./features/maintenance/pages/list/maintenance-list.component').then(m => m.MaintenanceListComponent)
+      },
+      {
+        path: 'maintenance/create',
+        loadComponent: () => import('./features/maintenance/pages/create/maintenance-create.component').then(m => m.MaintenanceCreateComponent)
+      },
+      {
+        path: 'maintenance/edit/:id',
+        loadComponent: () => import('./features/maintenance/pages/edit/maintenance-edit.component').then(m => m.MaintenanceEditComponent)
+      },
+      {
+        path: 'disposal',
+        loadComponent: () => import('./features/disposal/pages/list/disposal-list.component').then(m => m.DisposalListComponent)
+      },
+      {
+        path: 'disposal/create',
+        loadComponent: () => import('./features/disposal/pages/create/disposal-create.component').then(m => m.DisposalCreateComponent)
+      },
+      {
+        path: 'reports',
+        loadComponent: () => import('./features/reports/pages/reports.component').then(m => m.ReportsComponent)
+      },
+      {
+        path: 'notifications',
+        loadComponent: () => import('./features/notifications/pages/notification-list.component').then(m => m.NotificationListComponent)
+      },
+      {
+        path: 'audit-logs',
+        loadComponent: () => import('./features/audit/pages/audit-log-list.component').then(m => m.AuditLogListComponent)
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./features/profile/pages/profile.component').then(m => m.ProfileComponent)
+      }
     ]
   },
   {

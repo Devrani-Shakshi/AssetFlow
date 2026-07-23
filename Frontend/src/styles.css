@@ -1,8 +1,129 @@
-html,
-body {
-  height: 100%;
+/* Core Theme Variables & Global Rules */
+:root {
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-color: #0f172a;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.25s ease-in-out;
 }
 
 body {
+  font-family: var(--font-family) !important;
+  background-color: var(--bg-app) !important;
+  color: var(--text-main) !important;
   margin: 0;
+  height: 100%;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Premium Card Overrides */
+mat-card, .mat-mdc-card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast) !important;
+}
+
+/* Input Fields Refinements */
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: 8px !important;
+  font-family: var(--font-family) !important;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  border-color: #cbd5e1 !important;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
+  border-color: #94a3b8 !important;
+}
+
+/* Table Uplift */
+.mat-mdc-table {
+  background-color: transparent !important;
+}
+.mat-mdc-header-row {
+  background-color: #f8fafc !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
+.mat-mdc-header-cell {
+  color: var(--text-muted) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.5px !important;
+}
+.mat-mdc-row {
+  background-color: var(--bg-card) !important;
+  transition: background-color var(--transition-fast) !important;
+}
+.mat-mdc-row:hover {
+  background-color: #f8fafc !important;
+  cursor: pointer;
+}
+.mat-mdc-cell {
+  font-size: 14px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+/* Buttons Premium Styling */
+.mat-mdc-flat-button.mat-primary {
+  background-color: var(--primary-color) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.1px;
+  border-radius: var(--radius-md) !important;
+  transition: background-color var(--transition-fast) !important;
+}
+.mat-mdc-flat-button.mat-primary:hover {
+  background-color: var(--primary-hover) !important;
+}
+.mat-mdc-stroked-button {
+  border-color: #cbd5e1 !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+}
+
+/* Badge and Status Colors */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+.status-badge.active {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+.status-badge.inactive {
+  background-color: #fee2e2;
+  color: #b91c1c;
 }

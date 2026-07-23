@@ -1,0 +1,144 @@
+<div class="dashboard-wrapper">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Enterprise Assets Overview</h1>
+      <p class="subtitle">Track operations, manage life cycles, and audit inventory transactions in real-time.</p>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="spinner-container">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  } @else if (summary) {
+    <!-- Main stats -->
+    <div class="stats-grid">
+      <mat-card class="stat-card card-primary">
+        <mat-card-content>
+          <div class="card-header">
+            <span class="card-title">Total Fleet</span>
+            <div class="icon-wrapper circle-primary">
+              <mat-icon>devices</mat-icon>
+            </div>
+          </div>
+          <div class="card-value">{{ summary.totalAssets }}</div>
+          <div class="card-footer">
+            <span class="trend positive">Active hardware instances</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card card-success">
+        <mat-card-content>
+          <div class="card-header">
+            <span class="card-title">Allocated Assets</span>
+            <div class="icon-wrapper circle-success">
+              <mat-icon>assignment_turned_in</mat-icon>
+            </div>
+          </div>
+          <div class="card-value">{{ summary.assignedAssets }}</div>
+          <div class="card-footer">
+            <span class="trend">Assigned to staff members</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card card-warning">
+        <mat-card-content>
+          <div class="card-header">
+            <span class="card-title">In Maintenance</span>
+            <div class="icon-wrapper circle-warning">
+              <mat-icon>build</mat-icon>
+            </div>
+          </div>
+          <div class="card-value">{{ summary.maintenanceAssets }}</div>
+          <div class="card-footer">
+            <span class="trend warning">Undergoing active repair</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card card-danger">
+        <mat-card-content>
+          <div class="card-header">
+            <span class="card-title">Decommissioned</span>
+            <div class="icon-wrapper circle-danger">
+              <mat-icon>delete_sweep</mat-icon>
+            </div>
+          </div>
+          <div class="card-value">{{ summary.disposedAssets }}</div>
+          <div class="card-footer">
+            <span class="trend danger">Archived / Disposed logs</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Quick Actions Panel -->
+    <div class="section-container">
+      <h2 class="section-title">Quick Operations</h2>
+      <div class="quick-actions-grid">
+        @for (act of quickActions; track act.label) {
+          <mat-card class="action-card" [routerLink]="[act.link]">
+            <mat-card-content class="action-content">
+              <div class="action-icon-circle" [class]="act.color">
+                <mat-icon>{{ act.icon }}</mat-icon>
+              </div>
+              <div class="action-meta">
+                <span class="action-label">{{ act.label }}</span>
+                <span class="action-hint">Launch operation form</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </div>
+
+    <!-- Directory Overview Grid -->
+    <div class="section-container">
+      <h2 class="section-title">Corporate Directory</h2>
+      <div class="directory-grid">
+        <mat-card class="directory-card">
+          <mat-card-content class="directory-content">
+            <mat-icon class="dir-icon">people</mat-icon>
+            <div class="dir-meta">
+              <span class="dir-value">{{ summary.totalEmployees }}</span>
+              <span class="dir-label">Active Employees</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="directory-card">
+          <mat-card-content class="directory-content">
+            <mat-icon class="dir-icon">corporate_fare</mat-icon>
+            <div class="dir-meta">
+              <span class="dir-value">{{ summary.totalDepartments }}</span>
+              <span class="dir-label">Departments</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="directory-card">
+          <mat-card-content class="directory-content">
+            <mat-icon class="dir-icon">storefront</mat-icon>
+            <div class="dir-meta">
+              <span class="dir-value">{{ summary.totalVendors }}</span>
+              <span class="dir-label">Registered Vendors</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="directory-card">
+          <mat-card-content class="directory-content">
+            <mat-icon class="dir-icon">place</mat-icon>
+            <div class="dir-meta">
+              <span class="dir-value">{{ summary.totalLocations }}</span>
+              <span class="dir-label">Sites / Locations</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+</div>

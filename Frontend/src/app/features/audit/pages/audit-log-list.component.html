@@ -1,0 +1,86 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-titles">
+      <h1>Security & Audit Trail</h1>
+      <p class="subtitle">Real-time log of administrative and transactional changes</p>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search audit trail...</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by action, table or user ID" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  @if (isLoading) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else {
+    <div class="mat-elevation-z1 table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Timestamp Column -->
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Timestamp </th>
+          <td mat-cell *matCellDef="let row"> {{row.timestamp | date:'medium'}} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-chip-option selectable="false" [class]="getActionClass(row.action)">
+              {{row.action}}
+            </mat-chip-option>
+          </td>
+        </ng-container>
+
+        <!-- Entity Name Column -->
+        <ng-container matColumnDef="entityName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Table </th>
+          <td mat-cell *matCellDef="let row"> {{row.entityName}} </td>
+        </ng-container>
+
+        <!-- Entity ID Column -->
+        <ng-container matColumnDef="entityId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Record ID </th>
+          <td mat-cell *matCellDef="let row" class="code-cell"> {{row.entityId}} </td>
+        </ng-container>
+
+        <!-- IP Address Column -->
+        <ng-container matColumnDef="ipAddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> IP Address </th>
+          <td mat-cell *matCellDef="let row"> {{row.ipAddress || 'N/A'}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Diff </th>
+          <td mat-cell *matCellDef="let row">
+            @if (row.oldValue || row.newValue) {
+              <button mat-stroked-button color="primary" class="detail-btn" (click)="viewDetail(row)">
+                <mat-icon>difference</mat-icon>
+                View
+              </button>
+            } @else {
+              <span class="no-diff">No details</span>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="6">No logs found matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of logs"></mat-paginator>
+    </div>
+  }
+</div>
